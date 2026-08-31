@@ -1,0 +1,88 @@
+#:schema https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/pyproject.json
+# ref: <https://packaging.python.org/en/latest/specifications/pyproject-toml/>
+
+[project]
+name = "liblaf-traceback"
+description = "Rich, safe exception rendering with stdlib-compatible text formatting."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "liblaf", email = "30631553+liblaf@users.noreply.github.com" }]
+keywords = []
+classifiers = [
+  # ref: <https://pypi.org/classifiers/>
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed"
+]
+dependencies = ["liblaf-conf>=0.1.2", "packaging>=26.2", "rich>=15.0.0"]
+dynamic = ["version"]
+
+[project.urls]
+# ref: <https://packaging.python.org/en/latest/specifications/well-known-project-urls/#well-known-labels>
+"Changelog" = "https://github.com/liblaf/traceback/blob/main/CHANGELOG.md"
+"Documentation" = "https://liblaf.github.io/traceback/"
+"Funding" = "https://github.com/liblaf/traceback?sponsor=1"
+"Homepage" = "https://github.com/liblaf/traceback"
+"Issue Tracker" = "https://github.com/liblaf/traceback/issues"
+"Release Notes" = "https://github.com/liblaf/traceback/releases"
+"Source Code" = "https://github.com/liblaf/traceback"
+
+[dependency-groups]
+build = ["check-wheel-contents>=0.6", "hatch>=1", "twine>=6"]
+docs = ["griffe-fieldz>=0.5", "griffe-inherited-docstrings>=1", "griffe-pydantic>=1", "griffe-warnings-deprecated>=1", "mkdocstrings[python]>=1", "zensical>=0.0.44"]
+lint = ["import-linter[ui]>=2", "ruff>=0.15", "ty>=0.0.40"]
+nox = ["nox>=2026"]
+test = ["pytest>=9", "pytest-codspeed>=4", "pytest-cov>=7", "pytest-randomly>=4"]
+
+[build-system]
+requires = ["hatch-vcs", "hatchling"]
+build-backend = "hatchling.build"
+
+[tool.check-wheel-contents]
+ignore = ["W002"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/liblaf/traceback/_version.py"
+
+[tool.hatch.build.targets.sdist]
+only-include = ["src"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/liblaf"]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.importlinter]
+root_package = "liblaf.traceback"
+
+[[tool.importlinter.contracts]]
+ancestors = ["liblaf.traceback"]
+name = "Acyclic siblings"
+type = "acyclic_siblings"
+
+[tool.pytest]
+addopts = ["--doctest-modules", "--import-mode=importlib", "--junitxml=junit.xml", "--showlocals"]
+consider_namespace_packages = true
+junit_family = "legacy"
+strict = true
+testpaths = ["benches", "src", "tests"]
+
+[tool.ruff]
+extend = ".config/linters/ruff.toml"
+
+[tool.uv]
+default-groups = "all"
