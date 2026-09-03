@@ -13,7 +13,8 @@
 
 # liblaf.traceback
 
-Rich exception rendering for applications that need terminal output without giving up a stdlib-shaped text interface.
+Rich exception rendering for applications that need terminal output and a
+plain-text path for logs, files, and snapshots.
 
 ```python
 import liblaf.traceback

@@ -236,6 +236,25 @@ def test_optional_formatter_only_absorbs_missing_optional_package(
         _variable._resolve_default_frame_formatter()  # noqa: SLF001
 
 
+def test_optional_formatter_uses_pprint_presentations(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class Presentation:
+        pass
+
+    presentation = Presentation()
+    module = types.SimpleNamespace(
+        pretty=lambda _value: presentation,
+        format_frame_variables=lambda _frames: (("value = 1",),),
+    )
+    monkeypatch.setattr(_variable.importlib, "import_module", lambda _name: module)
+
+    assert _variable._resolve_default_formatter()(1) is presentation  # noqa: SLF001
+    frame_formatter = _variable._resolve_default_frame_formatter()  # noqa: SLF001
+    assert frame_formatter is not None
+    assert frame_formatter(({"value": 1},)) == (("value = 1",),)
+
+
 def test_frame_formatter_receives_all_frames_once(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
