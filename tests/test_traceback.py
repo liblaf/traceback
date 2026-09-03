@@ -255,6 +255,20 @@ def test_optional_formatter_uses_pprint_presentations(
     assert frame_formatter(({"value": 1},)) == (("value = 1",),)
 
 
+def test_optional_formatter_falls_back_when_capabilities_are_missing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = types.SimpleNamespace(
+        pformat=lambda _value: "old interface",
+        pformat_frames=lambda _frames: (("value = old interface",),),
+    )
+    monkeypatch.setattr(_variable.importlib, "import_module", lambda _name: module)
+
+    formatter = _variable._resolve_default_formatter()  # noqa: SLF001
+    assert formatter({"answer": 42}) == "{'answer': 42}"
+    assert _variable._resolve_default_frame_formatter() is None  # noqa: SLF001
+
+
 def test_frame_formatter_receives_all_frames_once(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

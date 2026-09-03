@@ -3,7 +3,7 @@
 
 [project]
 name = "liblaf-traceback"
-description = "Rich, safe exception rendering with stdlib-compatible text formatting."
+description = "Rich, safe exception presentations with plain text for logs and snapshots."
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"

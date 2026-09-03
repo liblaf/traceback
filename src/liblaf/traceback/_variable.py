@@ -24,7 +24,7 @@ def _resolve_default_formatter() -> VariableFormatter:
         if error.name != "liblaf.pprint":
             raise
         return pprint.pformat
-    return module.pretty
+    return getattr(module, "pretty", pprint.pformat)
 
 
 def _resolve_default_frame_formatter() -> FrameFormatter | None:
@@ -35,7 +35,7 @@ def _resolve_default_frame_formatter() -> FrameFormatter | None:
         if error.name != "liblaf.pprint":
             raise
         return None
-    return module.format_frame_variables
+    return getattr(module, "format_frame_variables", None)
 
 
 _default_formatter = _resolve_default_formatter()
