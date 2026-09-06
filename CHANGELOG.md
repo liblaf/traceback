@@ -6,3 +6,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [v0.1.0](https://github.com/liblaf/traceback/releases/tag/v0.1.0) - 2026-09-03
+
+### ✨ Features
+
+- **(traceback)** add rich exception renderer - [b1ce2a1](https://github.com/liblaf/traceback/commit/b1ce2a13ee050c3be29d622a004a7f696ae7557c) by [@liblaf](https://github.com/liblaf)
+
+### 🐛 Bug Fixes
+
+- **(traceback)** tolerate unavailable pprint capabilities - [213a920](https://github.com/liblaf/traceback/commit/213a9208453805bd11ff5cf8db74141cd4e9d21f) by [@liblaf](https://github.com/liblaf)
+
+### ♻️ Code Refactoring
+
+- adopt pprint presentation interface - [010b791](https://github.com/liblaf/traceback/commit/010b791406b4861aa10da65718f0df8fb4b6b25d) by [@liblaf](https://github.com/liblaf)
+
+### ⚙️ Continuous Integrations
+
+- skip absent benchmark suite - [1af3b75](https://github.com/liblaf/traceback/commit/1af3b75cb0742b651c1b9d7e3577c3aa0914a69c) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
